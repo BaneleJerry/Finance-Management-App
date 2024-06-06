@@ -2,12 +2,32 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
       // define association here
     }
   }
   User.init(
     {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      surname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      date_of_birth: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        unique: true,
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      last_accesed_at: {
+      updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
@@ -36,5 +56,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
   return User;
 };
