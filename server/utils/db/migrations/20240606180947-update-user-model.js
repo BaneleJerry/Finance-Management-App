@@ -22,7 +22,7 @@ module.exports = {
       date_of_birth: {
         type: Sequelize.DATEONLY,
         allowNull: false,
-        unique: true,
+        unique: false,
       },
       username: {
         type: Sequelize.STRING,

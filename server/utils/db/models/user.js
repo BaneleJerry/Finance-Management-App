@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       date_of_birth: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        unique: true,
+        unique: false,
       },
       username: {
         type: DataTypes.STRING,
