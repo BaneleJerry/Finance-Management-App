@@ -10,11 +10,22 @@ const PORT = process.env.PORT || 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log(`Request to ${req.path}`);
+  next();
+});
 
 app.use("/auth", authRouter);
 
-sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
-});
+const startServer = async () => {
+  try {
+    await sequelize.sync({ alter: true });
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error synchronizing models:", error);
+  }
+};
+
+startServer();
