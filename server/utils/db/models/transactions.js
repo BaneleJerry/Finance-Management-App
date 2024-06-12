@@ -2,6 +2,7 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Transactions extends Model {
+    
     static associations(models) {}
   }
   Transactions.init(
@@ -32,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       date: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        defaultValue: DataTypes.NOW,
       },
       description: {
         type: DataTypes.TEXT,

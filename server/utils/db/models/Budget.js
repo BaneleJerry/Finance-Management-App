@@ -2,7 +2,8 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Budget extends Model {
-    static associate(models) {}
+    static associate(models) {
+    }
   }
 
   Budget.init(
@@ -41,7 +42,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "budgets",
+      sequelize,
+      modelName: "budgets",
       timestamps: false,
       indexes: [
         {
@@ -51,4 +53,5 @@ module.exports = (sequelize, DataTypes) => {
       ],
     }
   );
+  return Budget;
 };
