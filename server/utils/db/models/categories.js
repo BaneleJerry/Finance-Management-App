@@ -2,7 +2,14 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Categories extends Model {
-    static associate(models) {}
+    static associate(models) {
+      Categories.belongsTo(models.Users, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE",
+      });
+      Categories.hasMany(models.transactions, { foreignKey: "category_id" });
+      Categories.hasMany(models.budget, { foreignKey: "category_id" });
+    }
   }
 
   Categories.init(
@@ -32,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Categories",
+      modelName: "categories",
       indexes: [
         {
           unique: true,

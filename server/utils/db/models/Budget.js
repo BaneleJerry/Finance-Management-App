@@ -3,6 +3,13 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Budget extends Model {
     static associate(models) {
+      Budget.belongsTo(models.Users, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE",
+      });
+      Budget.belongsTo(models.categories, {
+        foreignKey: "category_id",
+      });
     }
   }
 
@@ -43,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "budgets",
+      modelName: "budget",
       timestamps: false,
       indexes: [
         {
@@ -53,5 +60,6 @@ module.exports = (sequelize, DataTypes) => {
       ],
     }
   );
+
   return Budget;
 };
